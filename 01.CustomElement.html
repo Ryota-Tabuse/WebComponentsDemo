@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>01.CustomElement</title>
+  </head>
+
+  <body>
+    <!-- カスタムエレメント -->
+    <hello-world></hello-world>
+  </body>
+
+  <script>
+    class HelloWorld extends HTMLElement {
+      constructor() {
+        super();
+        this.innerHTML = "<p>Hello World</p>";
+      }
+    }
+    // CustomEelementの定義 第一引数が要素のタグ名
+    window.customElements.define("hello-world", HelloWorld);
+  </script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>02.CustomElement</title>
+    <style>
+      p {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <p>I am BULE!</p>
+    <red-text></red-text>
+
+    <script>
+      class RedText extends HTMLElement {
+        constructor() {
+          super();
+          // ShadowDOMの作成。戻り値はShadowルート
+          const shadowRoot = this.attachShadow({ mode: "open" });
+
+          // shadowRootにstyleタグを追加するように変更。
+          const style = document.createElement("style");
+          style.innerText = "p { color: red; }";
+          shadowRoot.appendChild(style);
+
+          const text = document.createElement("p");
+          text.innerText = "I am RED!";
+
+          // shadowRoot
+          shadowRoot.appendChild(text);
+        }
+      }
+      // CustomEelementの定義 第一引数が要素のタグ名
+      window.customElements.define("red-text", RedText);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- 名前指定バージョン -->
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>03.HTMLTemplate</title>
+    <style>
+      h2 {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <template id="template-test">
+      <style>
+        p {
+          color: red;
+        }
+      </style>
+      <p>I am RED!</p>
+    </template>
+
+    <!-- templateを使用したコンポーネント -->
+    <red-text>
+      <h2>Slot</h2>
+    </red-text>
+
+    <script>
+      class RedText extends HTMLElement {
+        constructor() {
+          super();
+          // ShadowDOMの作成。戻り値はShadowルート
+          const shadowRoot = this.attachShadow({ mode: "open" });
+          const template = document.getElementById("template-test").content;
+          shadowRoot.appendChild(template.cloneNode(true));
+        }
+      }
+      // CustomEelementの定義 第一引数が要素のタグ名
+      window.customElements.define("red-text", RedText);
+    </script>
+  </body>
+</html>
